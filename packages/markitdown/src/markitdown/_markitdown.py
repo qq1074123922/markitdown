@@ -135,7 +135,7 @@ class MarkItDown:
             self.register_converter(DocxConverter())
             self.register_converter(XlsxConverter())
             self.register_converter(XlsConverter())
-            self.register_converter(PptxConverter())
+            self.register_converter(PptxConverter(enable_llm_image_description=self.enable_llm))
             self.register_converter(WavConverter())
             self.register_converter(Mp3Converter())
             self.register_converter(ImageConverter())

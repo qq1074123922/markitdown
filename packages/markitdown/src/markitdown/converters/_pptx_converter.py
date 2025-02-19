@@ -15,9 +15,12 @@ class PptxConverter(HtmlConverter):
     """
 
     def __init__(
-        self, priority: float = DocumentConverter.PRIORITY_SPECIFIC_FILE_FORMAT
+        self, 
+        priority: float = DocumentConverter.PRIORITY_SPECIFIC_FILE_FORMAT,
+        enable_llm_image_description: bool = True
     ):
         super().__init__(priority=priority)
+        self.enable_llm_image_description = enable_llm_image_description
 
     def _get_llm_description(
         self, llm_client, llm_model, image_blob, content_type, prompt=None
@@ -74,7 +77,7 @@ class PptxConverter(HtmlConverter):
 
                     llm_client = kwargs.get("llm_client")
                     llm_model = kwargs.get("llm_model")
-                    if llm_client is not None and llm_model is not None:
+                    if self.enable_llm_image_description and llm_client is not None and llm_model is not None:
                         try:
                             llm_description = self._get_llm_description(
                                 llm_client,
